@@ -9,6 +9,20 @@ public class Main {
 	public static void main(String[] args) {
 		storeValueSymbolPairs();
 		Deck newDeck = new Deck();
+		
+		for (Card c: newDeck.getCards()) {
+			System.out.println(c.toString());
+		}
+		
+		newDeck.shuffle();
+		
+		System.out.println("Post Shuffle");
+		for (Card c: newDeck.getCards()) {
+			System.out.println(c.toString());
+		}
+		
+		HigherLowerGame newGame = new HigherLowerGame();
+		newGame.playGame();
 	}
 	
 	public static void storeValueSymbolPairs() {
@@ -21,7 +35,4 @@ public class Main {
 		symbols.put(12, "Q");
 		symbols.put(13, "K");
 	}
-	
-	
-
 }

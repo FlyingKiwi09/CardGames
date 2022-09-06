@@ -1,5 +1,5 @@
 
-public class Card {
+public class Card implements Comparable<Card>{
 	private Suit suit;
 	private int rank;
 	private String symbol;
@@ -38,6 +38,11 @@ public class Card {
 	
 	public String toString() {
 		return (this.suit + " " + this.rank + " " + this.symbol);
+	}
+
+	@Override
+	public int compareTo(Card c) {
+		return this.getRank() - c.getRank();
 	}
 
 }
