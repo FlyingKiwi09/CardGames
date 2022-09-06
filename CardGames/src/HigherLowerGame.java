@@ -8,6 +8,9 @@ public class HigherLowerGame {
 	private Deck gameDeck;
 	private Card lastCard = null;
 	private Card nextCard = null;
+	private int count = 0;
+	private boolean correct = true;
+	private boolean gameOver = false;
 
 	public HigherLowerGame() {
 		
@@ -19,7 +22,9 @@ public class HigherLowerGame {
 	}
 	
 	public void playGame() {
-		
+		UI.initialise();
+		gameOver = false;
+		count = 0;
 		gameDeck = new Deck();
 		gameDeck.shuffle();
 		this.lastCard = gameDeck.getCards().get(gameDeck.getCards().size()-1);
@@ -28,48 +33,64 @@ public class HigherLowerGame {
 		gameDeck.getCards().remove(gameDeck.getCards().size()-1);
 		UI.addButton("Higher", this::setHigher);
 		UI.addButton("Lower", this::setLower);
+		UI.addButton("New Game", this::play);
 //		UI.addButton("Go", this::go);
 	}
 	
 	public void setHigher() {
-		this.guessHigher = true;
-		go();
+		if(!gameOver) {
+			this.guessHigher = true;
+			go();
+		}
 	}
 	
 	public void setLower() {
-		this.guessHigher = false;
-		go();
+		if(!gameOver) {
+			this.guessHigher = false;
+			go();
+		}
 	}
 	
 	public void go() {
 		nextCard = gameDeck.getCards().get(gameDeck.getCards().size()-1);
 		gameDeck.getCards().remove(gameDeck.getCards().size()-1);
 		
-		int compared = lastCard.compareTo(nextCard);
+		AceHighOrLow comparator = new AceHighOrLow(guessHigher);
 		
+		int compared = comparator.compare(lastCard, nextCard);
+		
+		// update correct if the guess was incorrect
 		if (guessHigher) {
 			if (compared > 0) {
-				UI.println("Nope");
-			} else {
-				UI.println("Yip");
-			}
+				correct = false;
+			} 
 		} else {
 			if (compared < 0) {
-				UI.println("Nope");
-			} else {
-				UI.println("Yip");
-			}
+				correct = false;
+			} 
 		}
 		
+		// update last card and draw it
 		this.lastCard = this.nextCard;
 		drawCard(lastCard);
+		
+		// update text based on correct / incorrect guess
+		UI.clearText();
+		if (correct == false) {
+			gameOver = true;
+			UI.println("Game Over!");
+			UI.println("Streak: " + count + " correct guesses!");
+		} else {
+			count++;
+			UI.println("Streak: " + count + " correct guesses!");
+		}
 	}
 	
 	public void turnCard() {
 		
 	}
 	
-	// draws a card to the UK
+	// draws a card to the UI
 	public void drawCard(Card c) {
 		UI.clearGraphics();
 		if (c.getSuit() == Suit.Diamonds || c.getSuit() == Suit.Hearts ) {

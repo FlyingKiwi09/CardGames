@@ -22,7 +22,7 @@ public class Main {
 		}
 		
 		HigherLowerGame newGame = new HigherLowerGame();
-		newGame.playGame();
+		newGame.play();
 	}
 	
 	public static void storeValueSymbolPairs() {
