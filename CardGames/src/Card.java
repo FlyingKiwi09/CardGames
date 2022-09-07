@@ -5,7 +5,7 @@ public class Card implements Comparable<Card>{
 	private String symbol;
 	
 	// constructor
-	public Card(Suit suit, int rank, String symbol) {
+	public Card(Suit suit, String symbol, int rank) {
 		this.suit = suit;
 		this.rank = rank;
 		this.symbol = symbol;

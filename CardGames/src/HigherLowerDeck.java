@@ -3,25 +3,25 @@ import java.util.Map.Entry;
 
 public class HigherLowerDeck extends Deck{
 	
-	public static HashMap<Integer, String> symbols = new HashMap<>();
+	public static HashMap<String, Integer> symbols = new HashMap<>();
 	
 	public HigherLowerDeck() {
 		storeValueSymbolPairs();
 		for (Suit s: Suit.values()) {
-			for (Entry e: symbols.entrySet()) {
-				cards.add(new Card(s, (int)e.getKey(), e.getValue().toString()));
+			for (Entry<String, Integer> e: symbols.entrySet()) {
+				cards.add(new Card(s, e.getKey(), (int)e.getValue()));
 			}
 		}
 	}
 	
 	public static void storeValueSymbolPairs() {
-		symbols.put(1, "A");
+		symbols.put("A", 1);
 		for (int i = 2; i < 11; i++) {
-			Integer symbol = i;
-			symbols.put(symbol, symbol.toString());
+			Integer rank = i;
+			symbols.put(rank.toString(), rank);
 		}
-		symbols.put(11, "J");
-		symbols.put(12, "Q");
-		symbols.put(13, "K");
+		symbols.put("J", 11 );
+		symbols.put("Q", 12);
+		symbols.put("K", 13);
 	}
 }

@@ -18,10 +18,15 @@ public class HigherLowerGame {
 	
 	public void play() {
 		UI.initialise();
-		UI.addButton("Play Higher or Lower", this::playGame);
+		UI.addButton("Play Higher or Lower", this::newGame);
+		UI.addButton("Main Menu", this::reload);
 	}
 	
-	public void playGame() {
+	public void reload() {
+		Main.user.reload();
+	}
+	
+	public void newGame() {
 		UI.initialise();
 		gameOver = false;
 		correct = true;

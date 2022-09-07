@@ -7,7 +7,7 @@ public class Deck {
 	protected ArrayList<Card> cards = new ArrayList<Card>();
 	
 	public Deck() {
-		
+	
 	}
 
 	public ArrayList<Card> getCards() {
@@ -26,5 +26,11 @@ public class Deck {
 			cards.set(i, randomCard);
 			cards.set(randomInt, thisCard);
 		}
+	}
+	
+	public Card dealCard() {
+		Card nextCard = this.cards.get(0);
+		this.cards.remove(0);
+		return nextCard;
 	}
 }

@@ -7,8 +7,8 @@ public class BlackJackDeck extends Deck {
 	public BlackJackDeck() {
 		storeValueSymbolPairs();
 		for (Suit s: Suit.values()) {
-			for (Entry e: symbols.entrySet()) {
-				cards.add(new Card(s, (int)e.getKey(), e.getValue().toString()));
+			for (Entry<String, Integer> e: symbols.entrySet()) {
+				cards.add(new Card(s, e.getKey(), (int)e.getValue()));
 			}
 		}
 	}
@@ -16,8 +16,8 @@ public class BlackJackDeck extends Deck {
 	public static void storeValueSymbolPairs() {
 		symbols.put("A", 1);
 		for (int i = 2; i < 11; i++) {
-			Integer symbol = i;
-			symbols.put(symbol.toString(), symbol);
+			Integer rank = i;
+			symbols.put(rank.toString(), rank);
 		}
 		symbols.put("J", 10);
 		symbols.put("Q", 10);
