@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import ecs100.UI;
 
-public class BlackJackHand {
+public class BlackJackHand implements Comparable<BlackJackHand>{
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	private boolean containsAce = false;
 	private String name;
@@ -32,10 +32,12 @@ public class BlackJackHand {
 	
 	public int getSumHighAce() {
 		int sum = 0;
+		boolean usedAce = false; // can only have one high ace because two == 22 and this is bust
 		for (Card c: cards) {
-			if(c.getSymbol().equals("A")) {
+			if(c.getSymbol().equals("A") && !usedAce) {
 				containsAce = true;
 				sum = sum + 11;
+				usedAce = true;
 			} else {
 				sum = sum + c.getRank();
 			}
@@ -162,6 +164,26 @@ public class BlackJackHand {
 			UI.drawString(c.getSymbol(), x, y+(i+1)*40);
 			UI.drawString(c.getSuit().toString(), x+30, y+(i+1)*40);
 		}
+	}
+
+	@Override
+	public int compareTo(BlackJackHand o) {
+		// TODO Auto-generated method stub
+		int thisSum;
+		int otherSum;
+		if (this.getSumHighAce() > 21) {
+			thisSum = this.getSum();
+		} else {
+			thisSum = this.getSumHighAce();
+		}
+		
+		if (o.getSumHighAce() > 21) {
+			otherSum = o.getSum();
+		} else {
+			otherSum = o.getSumHighAce();
+		}
+		
+		return thisSum-otherSum; // if result is -ve otherSum is bigger
 	}
 	
 }
