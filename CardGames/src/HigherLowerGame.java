@@ -24,8 +24,9 @@ public class HigherLowerGame {
 	public void playGame() {
 		UI.initialise();
 		gameOver = false;
+		correct = true;
 		count = 0;
-		gameDeck = new Deck();
+		gameDeck = new HigherLowerDeck();
 		gameDeck.shuffle();
 		this.lastCard = gameDeck.getCards().get(gameDeck.getCards().size()-1);
 		UI.setFontSize(40);
@@ -34,7 +35,6 @@ public class HigherLowerGame {
 		UI.addButton("Higher", this::setHigher);
 		UI.addButton("Lower", this::setLower);
 		UI.addButton("New Game", this::play);
-//		UI.addButton("Go", this::go);
 	}
 	
 	public void setHigher() {
