@@ -10,6 +10,7 @@ public class UserInterface {
 		UI.initialise();
 		UI.addButton("Higher or Lower", this::playHigherLower);
 		UI.addButton("Black Jack", this::playBlackJack);
+		UI.addButton("Test Git", this::test);
 	}
 	
 	public void reload() {
@@ -27,5 +28,9 @@ public class UserInterface {
 	public void playBlackJack() {
 		BlackJackGame newGame = new BlackJackGame();
 		newGame.play();
+	}
+	
+	public void test() {
+		
 	}
 }
